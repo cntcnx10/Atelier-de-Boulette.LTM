@@ -63,9 +63,8 @@
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
         .floating-img { animation: float 6s ease-in-out infinite; }
 
-        /* เอฟเฟกต์โฮเวอร์สำหรับรูปทีมงาน */
-        .team-card:hover img { border-color: #D4AF37; transform: scale(1.1); }
-        .team-card img { transition: all 0.4s ease; }
+        .team-card img { transition: all 0.4s ease; border: 2px solid rgba(255, 255, 255, 0.1); }
+        .team-card:hover img { border-color: #D4AF37; transform: scale(1.05); }
     </style>
 </head>
 <body class="font-sans antialiased overflow-x-hidden selection:bg-stardust selection:text-void">
@@ -83,8 +82,8 @@
     <nav class="fixed w-full z-40 glass-panel border-b-0">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <img src="LoGo.png" alt="Logo" class="w-10 h-10 object-contain drop-shadow-lg">
-                <h1 class="font-serif text-xl tracking-widest text-stardust">Atelier de Boulette</h1>
+                <img src="LoGo.png" alt="Logo" class="w-12 h-12 object-contain mix-blend-screen drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">
+                <h1 class="font-serif text-xl tracking-widest text-stardust uppercase">Atelier de Boulette</h1>
             </div>
             <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
                 <a href="#gallery" class="hover:text-stardust transition">Exhibition</a>
@@ -118,7 +117,6 @@
             <div class="w-full md:w-1/2 h-[50vh] md:h-[70vh] relative flex justify-center items-center">
                 <div class="absolute w-3/4 h-3/4 border border-white/5 rounded-full animate-[spin_60s_linear_infinite]"></div>
                 <div class="absolute w-1/2 h-1/2 border border-stardust/20 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
-                
                 <div class="relative z-10 w-full h-full flex justify-center items-center floating-img">
                     <img src="9.jpg" alt="Midnight Magic" class="w-80 h-80 md:w-96 md:h-96 object-cover rounded-full shadow-[0_0_80px_rgba(212,175,55,0.2)] border-2 border-white/10">
                 </div>
@@ -143,26 +141,26 @@
                 <h3 class="text-4xl font-serif text-stardust mb-4">Acquire The Art</h3>
                 <p class="text-gray-400">เลือกขนาดคอลเลกชันเพื่อนำเข้าสู่กระบวนการแพ็กมิติ</p>
             </div>
-            <div class="w-full max-w-4xl mx-auto mb-16 rounded-2xl overflow-hidden border border-white/10">
-                <img src="10.jpg" alt="Sizes" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition duration-500">
+            <div class="w-full max-w-4xl mx-auto mb-16 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img src="10.jpg" alt="Packaging Sizes" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition duration-500">
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass-panel p-8 rounded-xl flex flex-col text-center border border-white/5 hover:border-stardust/50 transition duration-300 group bg-abyss/80">
-                    <h4 class="font-serif text-2xl mb-1 text-gray-300">Size S</h4>
-                    <p class="text-gray-500 text-sm mb-6">10 Masterpieces</p>
+                    <h4 class="font-serif text-2xl mb-1 text-gray-300 uppercase tracking-widest">Size S</h4>
+                    <p class="text-gray-500 text-sm mb-6 uppercase tracking-tighter">4oz Collection</p>
                     <div class="text-4xl font-bold text-white mb-8">69 <span class="text-lg font-normal text-gray-500">THB</span></div>
                     <button onclick="triggerWarp('Size S Collection')" class="mt-auto py-3 px-4 border border-stardust/50 text-stardust group-hover:bg-stardust group-hover:text-void rounded transition font-bold tracking-widest text-sm uppercase">Add to Cart</button>
                 </div>
                 <div class="glass-panel p-8 rounded-xl flex flex-col text-center border-2 border-stardust relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(212,175,55,0.1)] group bg-abyss/90">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-stardust text-void text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
-                    <h4 class="font-serif text-2xl mb-1 text-stardust">Size M</h4>
-                    <p class="text-gray-400 text-sm mb-6">15 Masterpieces</p>
+                    <h4 class="font-serif text-2xl mb-1 text-stardust uppercase tracking-widest">Size M</h4>
+                    <p class="text-gray-400 text-sm mb-6 uppercase tracking-tighter">6oz Collection</p>
                     <div class="text-5xl font-bold text-white mb-8">99 <span class="text-lg font-normal text-gray-500">THB</span></div>
                     <button onclick="triggerWarp('Size M Collection')" class="mt-auto py-3 px-4 bg-stardust text-void hover:bg-yellow-400 rounded transition font-bold tracking-widest text-sm uppercase">Add to Cart</button>
                 </div>
                 <div class="glass-panel p-8 rounded-xl flex flex-col text-center border border-white/5 hover:border-stardust/50 transition duration-300 group bg-abyss/80">
-                    <h4 class="font-serif text-2xl mb-1 text-gray-300">Size L</h4>
-                    <p class="text-gray-500 text-sm mb-6">25 Masterpieces</p>
+                    <h4 class="font-serif text-2xl mb-1 text-gray-300 uppercase tracking-widest">Size L</h4>
+                    <p class="text-gray-500 text-sm mb-6 uppercase tracking-tighter">8oz Collection</p>
                     <div class="text-4xl font-bold text-white mb-8">149 <span class="text-lg font-normal text-gray-500">THB</span></div>
                     <button onclick="triggerWarp('Size L Collection')" class="mt-auto py-3 px-4 border border-stardust/50 text-stardust group-hover:bg-stardust group-hover:text-void rounded transition font-bold tracking-widest text-sm uppercase">Add to Cart</button>
                 </div>
@@ -173,88 +171,88 @@
     <section id="team" class="py-24 bg-abyss border-t border-white/5 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h3 class="text-4xl font-serif text-stardust mb-4">The Development Team</h3>
-                <p class="text-gray-400">ทีมผู้พัฒนาผู้รังสรรค์นวัตกรรมแห่งห้วงมิติ (Nexus Architects)</p>
+                <h3 class="text-4xl font-serif text-stardust mb-4 uppercase tracking-widest">The Development Team</h3>
+                <p class="text-gray-400">กลุ่มผู้รังสรรค์นวัตกรรมแห่งห้วงมิติ (Nexus Architects)</p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="ณัฐธิดา อภิวงค์งาม.jpg" alt="ณัฐธิดา อภิวงค์งาม" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">ณัฐธิดา อภิวงค์งาม</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Lead Developer</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">ณัฐธิดา อภิวงค์งาม</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Chief Architect</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="ฉัตร์ฐริกา พูลทรัพย์.jpg" alt="ฉัตร์ฐริกา พูลทรัพย์" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">ฉัตร์ฐริกา พูลทรัพย์</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Creative Director</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">ฉัตร์ฐริกา พูลทรัพย์</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Nexus Designer</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="มนทิราลัย สมเดช.jpg" alt="มนทิราลัย สมเดช" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">มนทิราลัย สมเดช</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">UI Designer</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">มนทิราลัย สมเดช</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Visual Engineer</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="ดาหวัน โปรยกระโทก.jpg" alt="ดาหวัน โปรยกระโทก" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">ดาหวัน โปรยกระโทก</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Nutrition Specialist</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">ดาหวัน โปรยกระโทก</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Concept Specialist</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="ประกายทิพย์ น้อยสิงห์.jpg" alt="ประกายทิพย์ น้อยสิงห์" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">ประกายทิพย์ น้อยสิงห์</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Technical Engineer</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">ประกายทิพย์ น้อยสิงห์</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Systems Analyst</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="พรหมพร สว่างศรี.jpg" alt="พรหมพร สว่างศรี" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">พรหมพร สว่างศรี</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Backend Manager</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">พรหมพร สว่างศรี</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Core Developer</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="จิดาภา อินทร์เมือง.jpg" alt="จิดาภา อินทร์เมือง" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">จิดาภา อินทร์เมือง</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Content Strategist</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">จิดาภา อินทร์เมือง</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Strategy Lead</p>
                     </div>
                 </div>
 
-                <div class="team-card group block text-center space-y-4">
-                    <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-stardust transition-all duration-500 shadow-xl">
+                <div class="team-card text-center space-y-4 group">
+                    <div class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-2 border-white/10 shadow-2xl relative transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                         <img src="วรรณิษา เจ็กสูงเนิน.jpg" alt="วรรณิษา เจ็กสูงเนิน" class="w-full h-full object-cover">
                     </div>
-                    <div>
-                        <h5 class="font-serif text-white text-lg group-hover:text-stardust transition">วรรณิษา เจ็กสูงเนิน</h5>
-                        <p class="text-xs text-stardust uppercase tracking-widest mt-1">Dimensional Analyst</p>
+                    <div class="space-y-1">
+                        <h5 class="text-white font-serif group-hover:text-stardust transition duration-300">วรรณิษา เจ็กสูงเนิน</h5>
+                        <p class="text-[10px] text-stardust uppercase tracking-widest opacity-70">Dimensional Specialist</p>
                     </div>
                 </div>
             </div>
@@ -266,53 +264,58 @@
             <div class="glass-panel p-8 md:p-12 rounded-2xl border-t-4 border-stardust shadow-2xl relative overflow-hidden">
                 <div class="scanline"></div>
                 <div class="text-center mb-10">
-                    <h3 class="text-3xl font-serif text-stardust mb-2">Dimensional Checkout</h3>
-                    <p class="text-sm text-gray-400">ระบบฟอร์มสั่งซื้อข้ามมิติ - ระบุพิกัดปลายทางของคุณ</p>
+                    <h3 class="text-3xl font-serif text-stardust mb-2 uppercase tracking-widest">Dimensional Checkout</h3>
+                    <p class="text-sm text-gray-400">ระบุพิกัดปลายทาง เพื่อเริ่มต้นกระบวนการส่งมิติ</p>
                 </div>
                 <form id="orderForm" class="space-y-6">
                     <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Subject Name (ชื่อผู้รับ)</label>
-                        <input type="text" id="customerName" required class="w-full bg-nebula border border-white/10 rounded p-3 text-white focus:outline-none focus:border-stardust">
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2 font-serif">Subject Name (ผู้รับ)</label>
+                        <input type="text" id="customerName" required class="w-full bg-nebula border border-white/10 rounded p-4 text-white focus:outline-none focus:border-stardust transition duration-300">
                     </div>
-                    <div class="space-y-3 pt-4 border-t border-white/10">
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Select Transport Protocol</label>
+                    <div class="space-y-4 pt-4 border-t border-white/10">
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2 font-serif">Select Protocol</label>
                         <div class="flex flex-col md:flex-row gap-4">
                             <label class="flex-1 cursor-pointer">
                                 <input type="radio" name="deliveryMethod" value="timemachine" class="peer hidden" checked>
-                                <div class="p-4 border border-white/10 rounded text-center peer-checked:border-stardust peer-checked:bg-stardust/10 transition">
-                                    <p class="font-serif text-lg"> Timemachine</p>
-                                    <p class="text-xs text-gray-400">จัดส่งข้ามเวลา</p>
+                                <div class="p-5 border border-white/10 rounded-lg text-center peer-checked:border-stardust peer-checked:bg-stardust/10 transition-all duration-300">
+                                    <p class="font-serif text-lg text-stardust">Timemachine</p>
+                                    <p class="text-[10px] text-gray-500 uppercase mt-1">Cross-Time Delivery</p>
                                 </div>
                             </label>
                             <label class="flex-1 cursor-pointer">
                                 <input type="radio" name="deliveryMethod" value="anywheredoor" class="peer hidden">
-                                <div class="p-4 border border-white/10 rounded text-center peer-checked:border-hologram peer-checked:bg-hologram/10 transition">
-                                    <p class="font-serif text-lg"> Anywhere Door</p>
-                                    <p class="text-xs text-gray-400">จัดส่งข้ามมิติ</p>
+                                <div class="p-5 border border-white/10 rounded-lg text-center peer-checked:border-hologram peer-checked:bg-hologram/10 transition-all duration-300">
+                                    <p class="font-serif text-lg text-hologram">Anywhere Door</p>
+                                    <p class="text-[10px] text-gray-500 uppercase mt-1">Multi-Dimensional Portal</p>
                                 </div>
                             </label>
                         </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full mt-8 py-4 bg-gradient-to-r from-stardust to-yellow-600 text-void font-bold text-lg uppercase tracking-widest rounded hover:opacity-90 transform hover:scale-[1.02] transition">Initialize Warp Transfer</button>
+                    <button type="submit" id="submitBtn" class="w-full mt-8 py-4 bg-gradient-to-r from-stardust to-yellow-600 text-void font-bold text-lg uppercase tracking-widest rounded-lg hover:opacity-90 transform hover:scale-[1.02] transition duration-300 shadow-xl">
+                        Initialize Warp Transfer
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="border-t border-white/5 py-8 text-center bg-abyss">
-        <p class="text-gray-600 text-xs font-serif tracking-widest uppercase">© 2026 Atelier de Boulette. All Dimensions Reserved.</p>
+    <footer class="border-t border-white/5 py-12 text-center bg-abyss">
+        <div class="mb-4">
+            <img src="LoGo.png" alt="Logo Footer" class="w-8 h-8 mx-auto mix-blend-screen opacity-50 grayscale hover:grayscale-0 transition duration-500">
+        </div>
+        <p class="text-gray-600 text-[10px] font-serif tracking-[0.4em] uppercase">© 2026 Atelier de Boulette. All Dimensions Reserved.</p>
     </footer>
 
     <script>
         const galleryData = [
-            { id: 1, image: "4.jpg", name: "หญ้าอุดมสมบูรณ์", en: "The Verdant Pasture", flavor: "รสชาเขียว", pro: "22g", cal: "110", color: "from-green-900 to-green-700" },
-            { id: 2, image: "3.jpg", name: "ทุ่งรวงทอง", en: "Golden Harvest", flavor: "รสข้าวโอ๊ต", pro: "20g", cal: "130", color: "from-yellow-700 to-amber-900" },
-            { id: 3, image: "5.jpg", name: "แสงอาทิตย์รุ่งอรุณ", en: "Morning Glow", flavor: "รสฟักทอง", pro: "18g", cal: "105", color: "from-orange-600 to-red-900" },
-            { id: 4, image: "8.jpg", name: "ขุมทรัพย์ใต้ดิน", en: "Earth’s Jewel", flavor: "รสมันญี่ปุ่น", pro: "19g", cal: "120", color: "from-purple-800 to-fuchsia-900" },
-            { id: 5, image: "6.jpg", name: "มรกตแห่งพงไพร", en: "Deep Forest Emerald", flavor: "รสผักโขม", pro: "24g", cal: "95", color: "from-emerald-800 to-teal-900" },
-            { id: 6, image: "2.jpg", name: "พละกำลังสีขาว", en: "Prime Strength", flavor: "รสหมูล้วน 98%", pro: "28g", cal: "180", color: "from-gray-300 to-gray-600" },
-            { id: 7, image: "7.jpg", name: "เจ้าสมุทร", en: "Oceanic Pearl", flavor: "รสกุ้งล้วน", pro: "25g", cal: "140", color: "from-blue-800 to-indigo-900" },
-            { id: 8, image: "9.jpg", name: "มนตราสีนิล", en: "Midnight Magic", flavor: "รสช็อกโกแลต", pro: "26g", cal: "160", color: "from-gray-900 to-black" }
+            { id: 1, image: "4.jpg", name: "หญ้าอุดมสมบูรณ์", en: "The Verdant Pasture", flavor: "รสชาเขียว", pro: "22g", cal: "110" },
+            { id: 2, image: "3.jpg", name: "ทุ่งรวงทอง", en: "Golden Harvest", flavor: "รสข้าวโอ๊ต", pro: "20g", cal: "130" },
+            { id: 3, image: "5.jpg", name: "แสงอาทิตย์รุ่งอรุณ", en: "Morning Glow", flavor: "รสฟักทอง", pro: "18g", cal: "105" },
+            { id: 4, image: "8.jpg", name: "ขุมทรัพย์ใต้ดิน", en: "Earth’s Jewel", flavor: "รสมันญี่ปุ่น", pro: "19g", cal: "120" },
+            { id: 5, image: "6.jpg", name: "มรกตแห่งพงไพร", en: "Deep Forest Emerald", flavor: "รสผักโขม", pro: "24g", cal: "95" },
+            { id: 6, image: "2.jpg", name: "พละกำลังสีขาว", en: "Prime Strength", flavor: "รสหมูล้วน 98%", pro: "28g", cal: "180" },
+            { id: 7, image: "7.jpg", name: "เจ้าสมุทร", en: "Oceanic Pearl", flavor: "รสกุ้งล้วน", pro: "25g", cal: "140" },
+            { id: 8, image: "9.jpg", name: "มนตราสีนิล", en: "Midnight Magic", flavor: "รสช็อกโกแลต", pro: "26g", cal: "160" }
         ];
 
         const gridContainer = document.getElementById('product-grid');
@@ -321,15 +324,21 @@
                 <div class="art-card relative h-80 rounded-lg overflow-hidden cursor-pointer bg-void border border-white/10 group">
                     <img src="${item.image}" alt="${item.name}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10">
-                        <p class="text-xs uppercase tracking-widest text-stardust mb-1">${item.flavor}</p>
-                        <h4 class="font-serif text-2xl text-white leading-tight">${item.name}</h4>
-                        <p class="text-xs text-gray-300 mt-1">${item.en}</p>
+                        <p class="text-[10px] uppercase tracking-widest text-stardust mb-1">${item.flavor}</p>
+                        <h4 class="font-serif text-xl text-white leading-tight">${item.name}</h4>
+                        <p class="text-[9px] text-gray-400 mt-1 uppercase tracking-tighter">${item.en}</p>
                     </div>
-                    <div class="overlay absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
-                        <h5 class="font-serif text-white mb-4 uppercase tracking-widest text-sm text-stardust">Nutrition Facts</h5>
+                    <div class="overlay absolute inset-0 bg-black/85 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
+                        <h5 class="font-serif text-white mb-4 uppercase tracking-widest text-xs text-stardust">Nutritional Nexus</h5>
                         <div class="flex space-x-6">
-                            <div><p class="text-3xl font-bold text-stardust">${item.pro}</p><p class="text-xs text-gray-400 uppercase">Protein</p></div>
-                            <div><p class="text-3xl font-bold text-white">${item.cal}</p><p class="text-xs text-gray-400 uppercase">Kcal</p></div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-stardust">${item.pro}</p>
+                                <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Protein</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-white">${item.cal}</p>
+                                <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-1">Kcal</p>
+                            </div>
                         </div>
                     </div>
                 </div>`;
@@ -349,11 +358,15 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = 'Transmitting...';
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Transmitting to Nexus...';
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
             setTimeout(() => {
-                alert('Transfer initiated! ตรวจสอบ Payload ใน Console');
+                alert('Transfer Protocol Initiated! เตรียมรับเสบียงของคุณในห้วงมิติที่กำหนด');
                 this.reset();
-                submitBtn.innerText = 'Initialize Warp Transfer';
+                submitBtn.innerText = originalText;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             }, 1500);
         });
     </script>
