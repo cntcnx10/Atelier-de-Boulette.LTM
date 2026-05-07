@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier de Boulette | The Dimensional Meatball Gallery</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Cinzel', 'serif'],
+                        'sans': ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        // โทนสี Monochromatic & Analogous (Deep Space / Mystic)
+                        void: '#050507',
+                        abyss: '#0F1016',
+                        nebula: '#1A1C29',
+                        stardust: '#D4AF37', // สีทองสำหรับ Accent ความพรีเมียม
+                        hologram: '#4ade80' // สีเขียวสำหรับ UI Sci-fi
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        html { scroll-behavior: smooth; background-color: #050507; color: #e2e8f0; }
+        
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(26, 28, 41, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hover Overlay for Product Gallery */
+        .art-card .overlay {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .art-card:hover .overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .art-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .art-card:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(212, 175, 55, 0.15); border-color: #D4AF37; }
+
+        /* Warp Portal Effect (Add to Cart) */
+        .warp-portal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 150vw;
+            height: 150vw;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, rgba(212, 175, 55, 0.1) 30%, rgba(5, 5, 7, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            mix-blend-mode: screen;
+        }
+        @keyframes warpDrive {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; }
+            80% { transform: translate(-50%, -50%) scale(1) rotate(180deg); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1.5) rotate(360deg); opacity: 0; }
+        }
+        .warp-active { animation: warpDrive 1.2s ease-out forwards; }
+
+        /* Sci-fi UI Elements */
+        .scanline {
+            position: absolute; width: 100%; height: 4px; background: rgba(74, 222, 128, 0.3);
+            animation: scan 3s linear infinite; pointer-events: none; z-index: 10;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* Floating Image Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-img {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-stardust selection:text-void">
+
+    <div id="warpPortal" class="warp-portal"></div>
+
+    <div id="toastMsg" class="fixed top-24 right-4 glass-panel border-l-4 border-stardust px-6 py-4 rounded-r shadow-2xl transform translate-x-full opacity-0 transition-all duration-300 z-50 flex items-center space-x-3">
+        <span class="text-2xl">✨</span>
+        <div>
+            <h4 class="font-serif text-stardust font-bold text-sm">Warp Successful</h4>
+            <p class="text-xs text-gray-300" id="toastText">Item digitized into your dimensional cart.</p>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-40 glass-panel border-b-0">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-xl tracking-widest text-stardust">Atelier de Boulette</h1>
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest">
+                <a href="#gallery" class="hover:text-stardust transition">Exhibition</a>
+                <a href="#pricing" class="hover:text-stardust transition">Acquire</a>
+                <a href="#checkout" class="hover:text-stardust transition">Delivery</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-900/30 rounded-full blur-[120px]"></div>
+        
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center w-full z-10 relative">
+            <div class="w-full md:w-1/2 space-y-6 text-center md:text-left mt-10 md:mt-0">
+                <p class="text-stardust text-xs uppercase tracking-[0.4em] font-serif">Premium Whey Protein Craft</p>
+                <h2 class="text-5xl md:text-7xl font-serif font-bold leading-tight">
+                    Taste Beyond <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-stardust to-amber-200">Time & Space.</span>
+                </h2>
+                <p class="text-gray-400 font-light text-lg max-w-lg mx-auto md:mx-0">
+                    แกลเลอรีลูกชิ้นคราฟต์เวย์โปรตีนที่ผสานศิลปะแห่งรสชาติ พร้อมบริการจัดส่งสุดล้ำด้วย <span class="text-stardust">Timemachine</span> และ <span class="text-stardust">ประตูไปไหนก็ได้</span>
+                </p>
+                <div class="pt-4">
+                    <a href="#gallery" class="inline-block px-8 py-4 bg-transparent border border-stardust text-stardust hover:bg-stardust hover:text-void rounded transition duration-300 uppercase tracking-widest text-sm font-bold">
+                        Enter Gallery
+                    </a>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 h-[50vh] md:h-[70vh] relative flex justify-center items-center">
+                <div class="absolute w-3/4 h-3/4 border border-white/5 rounded-full animate-[spin_60s_linear_infinite]"></div>
+                <div class="absolute w-1/2 h-1/2 border border-stardust/20 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
+                
+                <div class="relative z-10 w-full h-full flex justify-center items-center floating-img">
+                    <img src="9.jpg" alt="Midnight Magic - Chocolate Whey Protein Meatball" class="w-80 h-80 md:w-96 md:h-96 object-cover rounded-full shadow-[0_0_80px_rgba(212,175,55,0.2)] border-2 border-white/10">
+                </div>
+                
+                <div class="absolute bottom-4 right-4 glass-panel px-4 py-2 rounded text-xs font-serif text-gray-400 border-l-2 border-stardust z-20">
+                    Currently Viewing: <br><span class="text-white text-sm">Midnight Magic (มนตราสีนิล)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 bg-abyss relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 space-y-4">
+                <h3 class="text-4xl font-serif text-stardust">The Masterpieces</h3>
+                <p class="text-gray-400">นิทรรศการลูกชิ้น 8 รสชาติ ที่รังสรรค์อย่างวิจิตรบรรจง</p>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-void relative">
+        <div class="absolute inset-0 opacity-5 bg-[url('1.jpg')] bg-cover bg-center filter grayscale mix-blend-overlay"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-serif text-stardust mb-4">Acquire The Art</h3>
+                <p class="text-gray-400">เลือกขนาดคอลเลกชันเพื่อนำเข้าสู่กระบวนการแพ็กมิติ</p>
+            </div>
+
+            <div class="w-full max-w-4xl mx-auto mb-16 rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.02)]">
+                <img src="10.jpg" alt="Packaging Sizes S, M, L" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition duration-500">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-xl flex flex-col text-center border border-white/5 hover:border-stardust/50 transition duration-300 group bg-abyss/80">
+                    <h4 class="font-serif text-2xl mb-1 text-gray-300">Size S</h4>
+                    <p class="text-gray-500 text-sm mb-6">4oz - 10 Masterpieces</p>
+                    <div class="text-4xl font-bold text-white mb-8">69 <span class="text-lg font-normal text-gray-500">THB</span></div>
+                    <button onclick="triggerWarp('Size S Collection')" class="mt-auto py-3 px-4 border border-stardust/50 text-stardust group-hover:bg-stardust group-hover:text-void rounded transition font-bold tracking-widest text-sm">ADD TO CART</button>
+                </div>
+                
+                <div class="glass-panel p-8 rounded-xl flex flex-col text-center border-2 border-stardust relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(212,175,55,0.1)] group bg-abyss/90">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-stardust text-void text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
+                    <h4 class="font-serif text-2xl mb-1 text-stardust">Size M</h4>
+                    <p class="text-gray-400 text-sm mb-6">6oz - 15 Masterpieces</p>
+                    <div class="text-5xl font-bold text-white mb-8">99 <span class="text-lg font-normal text-gray-500">THB</span></div>
+                    <button onclick="triggerWarp('Size M Collection')" class="mt-auto py-3 px-4 bg-stardust text-void hover:bg-yellow-400 rounded transition font-bold tracking-widest text-sm">ADD TO CART</button>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl flex flex-col text-center border border-white/5 hover:border-stardust/50 transition duration-300 group bg-abyss/80">
+                    <h4 class="font-serif text-2xl mb-1 text-gray-300">Size L</h4>
+                    <p class="text-gray-500 text-sm mb-6">8oz - 25 Masterpieces</p>
+                    <div class="text-4xl font-bold text-white mb-8">149 <span class="text-lg font-normal text-gray-500">THB</span></div>
+                    <button onclick="triggerWarp('Size L Collection')" class="mt-auto py-3 px-4 border border-stardust/50 text-stardust group-hover:bg-stardust group-hover:text-void rounded transition font-bold tracking-widest text-sm">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="checkout" class="py-24 bg-abyss border-t border-white/5 relative">
+        <div class="absolute right-0 top-0 w-64 h-64 bg-green-900/20 rounded-full blur-[100px]"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 relative z-10">
+            <div class="glass-panel p-8 md:p-12 rounded-2xl border-t-4 border-stardust shadow-2xl relative overflow-hidden">
+                <div class="scanline"></div> <div class="text-center mb-10">
+                    <h3 class="text-3xl font-serif text-stardust mb-2">Dimensional Checkout</h3>
+                    <p class="text-sm text-gray-400">ระบบฟอร์มสั่งซื้อข้ามมิติ - ระบุพิกัดปลายทางของคุณ</p>
+                </div>
+
+                <form id="orderForm" class="space-y-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Subject Name (ชื่อผู้รับ)</label>
+                        <input type="text" id="customerName" required class="w-full bg-nebula border border-white/10 rounded p-3 text-white focus:outline-none focus:border-stardust transition">
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-white/10">
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Select Transport Protocol (วิธีการจัดส่ง)</label>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deliveryMethod" value="timemachine" class="peer hidden" checked>
+                                <div class="p-4 border border-white/10 rounded text-center peer-checked:border-stardust peer-checked:bg-stardust/10 transition">
+                                    <p class="font-serif text-lg"> Timemachine</p>
+                                    <p class="text-xs text-gray-400 mt-1">จัดส่งข้ามเวลา</p>
+                                </div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deliveryMethod" value="anywheredoor" class="peer hidden">
+                                <div class="p-4 border border-white/10 rounded text-center peer-checked:border-hologram peer-checked:bg-hologram/10 transition">
+                                    <p class="font-serif text-lg"> Anywhere Door</p>
+                                    <p class="text-xs text-gray-400 mt-1">จัดส่งข้ามมิติ/สถานที่</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="timemachineInput" class="animate-fade-in">
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Target Era (เลือกยุคสมัย)</label>
+                        <select id="eraSelect" class="w-full bg-nebula border border-white/10 rounded p-3 text-white focus:outline-none focus:border-stardust appearance-none">
+                            <option value="stone_age">ยุคหิน (Stone Age - 10,000 BC)</option>
+                            <option value="ancient_egypt">อียิปต์โบราณ (Ancient Egypt)</option>
+                            <option value="renaissance">ยุคฟื้นฟูศิลปวิทยา (Renaissance)</option>
+                            <option value="present" selected>ยุคปัจจุบัน (Present Day)</option>
+                            <option value="future_2099">โลกอนาคต (Cyber City 2099)</option>
+                        </select>
+                    </div>
+
+                    <div id="anywhereDoorInput" class="hidden animate-fade-in">
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Specific Coordinates (ระบุสถานที่/มิติ)</label>
+                        <input type="text" id="locationInput" placeholder="เช่น ยอดเขาเอเวอเรสต์, ดาวอังคาร โซน 4, ห้องนั่งเล่นของโดราเอมอน..." class="w-full bg-nebula border border-white/10 rounded p-3 text-white focus:outline-none focus:border-hologram transition">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full mt-8 py-4 bg-gradient-to-r from-stardust to-yellow-600 text-void font-bold text-lg uppercase tracking-widest rounded hover:opacity-90 transition transform hover:scale-[1.02]">
+                        Initialize Warp Transfer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-void">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-serif text-stardust mb-4">Echoes of Time</h3>
+                <p class="text-gray-400">เสียงตอบรับจากลูกค้าในห้วงเวลาต่างๆ</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-xl relative border-t-2 border-stardust">
+                    <div class="text-stardust text-4xl font-serif absolute top-4 right-4 opacity-20">"</div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-yellow-900 flex items-center justify-center text-xl">𓀀</div>
+                        <div>
+                            <h5 class="font-serif font-bold text-white">Pharaoh Ramesses</h5>
+                            <p class="text-xs text-stardust">Ancient Egypt</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic">"ส่งตรงถึงห้องบรรทมในพีระมิด! รส 'พละกำลังสีขาว' ช่วยฟื้นฟูพลังให้ข้าหลังจากการสร้างวิหารได้อย่างดีเยี่ยม"</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl relative border-t-2 border-stardust">
+                    <div class="text-stardust text-4xl font-serif absolute top-4 right-4 opacity-20">"</div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-red-900 flex items-center justify-center text-xl">⚔️</div>
+                        <div>
+                            <h5 class="font-serif font-bold text-white">Centurion Marcus</h5>
+                            <p class="text-xs text-stardust">Roman Empire</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic">"Veni, Vidi, Vici! ประตูไปไหนก็ได้เปิดออกกลางสนามรบ รส 'เจ้าสมุทร' เป็นเสบียงพรีเมียมที่ทหารโรมันคู่ควร"</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl relative border-t-2 border-stardust">
+                    <div class="text-stardust text-4xl font-serif absolute top-4 right-4 opacity-20">"</div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center text-xl">🚀</div>
+                        <div>
+                            <h5 class="font-serif font-bold text-white">Commander Kael</h5>
+                            <p class="text-xs text-stardust">Mars Colony, 2099</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed italic">"'มนตราสีนิล' คือศิลปะที่แท้จริง ระบบส่งข้ามมิติแม่นยำมาก โผล่มากลางยานแม่แบบพอดีคำ ไม่ต้องกินแต่อาหารหลอดอีกต่อไป"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 py-8 text-center bg-abyss">
+        <p class="text-gray-600 text-xs font-serif tracking-widest uppercase">© 2026 Atelier de Boulette. All Dimensions Reserved.</p>
+    </footer>
+
+    <script>
+        // --- 1. Product Gallery Data & Rendering (พร้อมใส่รูปภาพที่ถูกต้อง) ---
+        const galleryData = [
+            { id: 1, image: "4.jpg", name: "หญ้าอุดมสมบูรณ์", en: "The Verdant Pasture", flavor: "รสชาเขียว", pro: "22g", cal: "110", color: "from-green-900 to-green-700" },
+            { id: 2, image: "3.jpg", name: "ทุ่งรวงทอง", en: "Golden Harvest", flavor: "รสข้าวโอ๊ต", pro: "20g", cal: "130", color: "from-yellow-700 to-amber-900" },
+            { id: 3, image: "5.jpg", name: "แสงอาทิตย์รุ่งอรุณ", en: "Morning Glow", flavor: "รสฟักทอง", pro: "18g", cal: "105", color: "from-orange-600 to-red-900" },
+            { id: 4, image: "8.jpg", name: "ขุมทรัพย์ใต้ดิน", en: "Earth’s Jewel", flavor: "รสมันญี่ปุ่น", pro: "19g", cal: "120", color: "from-purple-800 to-fuchsia-900" },
+            { id: 5, image: "6.jpg", name: "มรกตแห่งพงไพร", en: "Deep Forest Emerald", flavor: "รสผักโขม", pro: "24g", cal: "95", color: "from-emerald-800 to-teal-900" },
+            { id: 6, image: "2.jpg", name: "พละกำลังสีขาว", en: "Prime Strength", flavor: "รสหมูล้วน 98%", pro: "28g", cal: "180", color: "from-gray-300 to-gray-600" },
+            { id: 7, image: "7.jpg", name: "เจ้าสมุทร", en: "Oceanic Pearl", flavor: "รสกุ้งล้วน", pro: "25g", cal: "140", color: "from-blue-800 to-indigo-900" },
+            { id: 8, image: "9.jpg", name: "มนตราสีนิล", en: "Midnight Magic", flavor: "รสช็อกโกแลต", pro: "26g", cal: "160", color: "from-gray-900 to-black" }
+        ];
+
+        const gridContainer = document.getElementById('product-grid');
+        
+        galleryData.forEach(item => {
+            const cardHTML = `
+                <div class="art-card relative h-80 rounded-lg overflow-hidden cursor-pointer bg-void border border-white/10 group">
+                    <img src="${item.image}" alt="${item.name}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition duration-500 z-0">
+                    
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10">
+                        <p class="text-xs uppercase tracking-widest text-stardust mb-1 drop-shadow-md">${item.flavor}</p>
+                        <h4 class="font-serif text-2xl text-white leading-tight drop-shadow-lg">${item.name}</h4>
+                        <p class="text-xs text-gray-300 mt-1 drop-shadow-md">${item.en}</p>
+                    </div>
+                    
+                    <div class="overlay absolute inset-0 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
+                        <div class="w-10 h-10 border border-stardust rounded-full flex items-center justify-center mb-4">
+                            <span class="text-stardust text-lg">✨</span>
+                        </div>
+                        <h5 class="font-serif text-white mb-4 uppercase tracking-widest text-sm">Nutrition Facts</h5>
+                        <div class="flex space-x-6">
+                            <div>
+                                <p class="text-3xl font-bold text-stardust">${item.pro}</p>
+                                <p class="text-xs text-gray-400 uppercase mt-1">Protein</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-white">${item.cal}</p>
+                                <p class="text-xs text-gray-400 uppercase mt-1">Kcal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            gridContainer.innerHTML += cardHTML;
+        });
+
+        // --- 2. Add to Cart (Warp Portal Effect) ---
+        function triggerWarp(itemName) {
+            // Trigger Animation
+            const portal = document.getElementById('warpPortal');
+            portal.classList.remove('warp-active');
+            void portal.offsetWidth; // Trigger reflow
+            portal.classList.add('warp-active');
+
+            // Show Toast (Fixed Template Literal syntax)
+            const toast = document.getElementById('toastMsg');
+            document.getElementById('toastText').innerText = `${itemName} digitized into your dimensional cart.`;
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
+
+        // --- 3. Checkout Form Logic (Toggle Inputs & Webhook Mock) ---
+        const radioTimemachine = document.querySelector('input[value="timemachine"]');
+        const radioAnywhereDoor = document.querySelector('input[value="anywheredoor"]');
+        const timemachineInput = document.getElementById('timemachineInput');
+        const anywhereDoorInput = document.getElementById('anywhereDoorInput');
+
+        // Toggle UI based on Radio selection
+        function updateFormUI() {
+            if (radioTimemachine.checked) {
+                timemachineInput.classList.remove('hidden');
+                anywhereDoorInput.classList.add('hidden');
+            } else {
+                timemachineInput.classList.add('hidden');
+                anywhereDoorInput.classList.remove('hidden');
+            }
+        }
+
+        radioTimemachine.addEventListener('change', updateFormUI);
+        radioAnywhereDoor.addEventListener('change', updateFormUI);
+
+        // Handle Submit (Webhook API Mockup)
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerText;
+            
+            // เปลี่ยนสถานะปุ่ม
+            submitBtn.innerText = 'Transmitting to Nexus...';
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // รวบรวมข้อมูล Order
+            const deliveryType = document.querySelector('input[name="deliveryMethod"]:checked').value;
+            const targetDestination = deliveryType === 'timemachine' 
+                                    ? document.getElementById('eraSelect').value 
+                                    : document.getElementById('locationInput').value;
+
+            const payload = {
+                customer_name: document.getElementById('customerName').value,
+                delivery_protocol: deliveryType,
+                destination: targetDestination,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('--- กำลังส่งคำสั่งซื้อข้ามมิติ... ---');
+            console.log('Payload Data:', payload);
+
+            // ระบบจำลอง (Simulation)
+            setTimeout(() => {
+                alert('คำสั่งซื้อถูกส่งเข้าสู่กระแสเวลาเรียบร้อยแล้ว! (Simulation Mode: ตรวจสอบ Payload ได้ที่ Console)');
+                this.reset();
+                updateFormUI();
+                submitBtn.innerText = originalText;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
