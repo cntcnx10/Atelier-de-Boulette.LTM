@@ -96,10 +96,19 @@
 
     <nav class="fixed w-full z-40 glass-panel border-b-0">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="logo.png" alt="Logo" class="w-12 h-16 object-contain mix-blend-screen drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]" onerror="this.src='https://via.placeholder.com/48x64/1A1C29/D4AF37?text=LOGO'">
-                <h1 class="font-serif text-xl tracking-widest text-stardust uppercase hidden sm:block">Atelier de Boulette</h1>
+            
+            <!-- Logo Section with Clickable Modal -->
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="openLogoModal()">
+                <div class="relative">
+                    <img src="logo.png" alt="Logo" class="w-12 h-16 object-contain mix-blend-screen drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] group-hover:scale-110 transition duration-300" onerror="this.src='https://via.placeholder.com/48x64/1A1C29/D4AF37?text=LOGO'">
+                    <div class="absolute inset-0 bg-stardust/20 blur-xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="font-serif text-xl tracking-widest text-stardust uppercase hidden sm:block">Atelier de Boulette</h1>
+                    <span class="text-[7px] text-gray-500 tracking-[0.4em] uppercase hidden sm:block opacity-0 group-hover:opacity-100 transition duration-300">Expand Identity</span>
+                </div>
             </div>
+
             <div class="flex items-center space-x-6 md:space-x-8 text-sm uppercase tracking-widest">
                 <a href="#gallery" class="hidden md:block hover:text-stardust transition">Exhibition</a>
                 <a href="#pricing" class="hidden md:block hover:text-stardust transition">Acquire</a>
@@ -116,6 +125,26 @@
         </div>
     </nav>
 
+    <!-- NEW: Logo HD Modal -->
+    <div id="logoModal" class="custom-modal fixed inset-0 z-[70] flex items-center justify-center opacity-0 invisible">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl" onclick="closeLogoModal()"></div>
+        <div class="modal-content-scale relative max-w-lg w-11/12 text-center z-10">
+            <button onclick="closeLogoModal()" class="absolute -top-16 right-0 text-white hover:text-stardust transition hover:rotate-90 duration-300">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="glass-panel p-10 rounded-[2.5rem] border border-stardust/30 bg-abyss/40 relative overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+                <div class="scanline"></div>
+                <img src="logo.png" alt="Logo HD" class="w-full h-auto max-h-[65vh] object-contain drop-shadow-[0_0_30px_rgba(212,175,55,0.5)] mx-auto relative z-10" onerror="this.src='https://via.placeholder.com/600x800/1A1C29/D4AF37?text=IDENTITY+MARK'">
+                <div class="mt-8 relative z-10">
+                    <h3 class="font-serif text-3xl text-stardust tracking-[0.3em] uppercase">The Nexus Insignia</h3>
+                    <div class="h-px w-24 bg-gradient-to-r from-transparent via-stardust to-transparent mx-auto my-4"></div>
+                    <p class="text-gray-400 text-[10px] uppercase tracking-[0.5em]">Authentic Dimensional Gastronomy Mark</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay & Drawer -->
     <div id="cartOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity" onclick="toggleCart()"></div>
     <div id="cartDrawer" class="fixed top-0 right-0 w-full sm:w-96 h-full glass-panel bg-abyss/95 border-l border-white/10 z-[51] transform translate-x-full transition-transform duration-300 flex flex-col shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
         <div class="p-6 border-b border-white/10 flex justify-between items-center bg-void/50">
@@ -144,6 +173,7 @@
         </div>
     </div>
 
+    <!-- Order Modal -->
     <div id="orderModal" class="custom-modal fixed inset-0 z-[60] flex items-center justify-center opacity-0 invisible">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeOrderModal()"></div>
         <div class="modal-content-scale relative w-11/12 max-w-2xl mx-auto glass-panel border border-stardust/50 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.2)] bg-abyss/95 z-10 max-h-[90vh] overflow-y-auto no-scrollbar">
@@ -256,6 +286,7 @@
         </div>
     </div>
 
+    <!-- Profile Modal -->
     <div id="profileModal" class="custom-modal fixed inset-0 z-[60] flex items-center justify-center opacity-0 invisible">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeProfile()"></div>
         <div class="modal-content-scale relative w-11/12 max-w-4xl mx-auto glass-panel border border-stardust/50 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.2)] bg-abyss/95 z-10 flex flex-col md:flex-row">
@@ -290,6 +321,7 @@
         </div>
     </div>
 
+    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
         <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-900/30 rounded-full blur-[120px]"></div>
@@ -301,7 +333,7 @@
                     Taste Beyond <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-stardust to-amber-200">Time & Space.</span>
                 </h2>
                 <p class="text-gray-400 font-light text-lg max-w-lg mx-auto md:mx-0">
-                    แกลเลอรีลูกชิ้นคราฟต์เวย์โปรตีนที่ผสานศิลปะแห่งรสชาติ พร้อมบริการจัดส่งสุดล้ำด้วย <span class="text-stardust">Timemachine</span> และ <span class="text-stardust">ประตูไปไหนก็ได้</span>
+                    ลูกชิ้นคราฟต์เวย์โปรตีนที่ผสานศิลปะแห่งรสชาติ พร้อมบริการจัดส่งสุดล้ำด้วย <span class="text-stardust">Timemachine</span> และ <span class="text-stardust">ประตูไปไหนก็ได้</span>
                 </p>
                 <div class="pt-4">
                     <a href="#gallery" class="inline-block px-8 py-4 bg-transparent border border-stardust text-stardust hover:bg-stardust hover:text-void rounded transition duration-300 uppercase tracking-widest text-sm font-bold">
@@ -326,6 +358,7 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
     <section id="gallery" class="py-24 bg-abyss relative border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 space-y-4">
@@ -336,6 +369,7 @@
         </div>
     </section>
 
+    <!-- Pricing Section -->
     <section id="pricing" class="py-24 bg-void relative">
         <div class="absolute inset-0 opacity-5 bg-[url('1.jpg')] bg-cover bg-center filter grayscale mix-blend-overlay"></div>
         <div class="max-w-6xl mx-auto px-6 relative z-10">
@@ -370,6 +404,7 @@
         </div>
     </section>
 
+    <!-- Checkout Section -->
     <section id="checkout" class="py-24 bg-void border-t border-white/5 relative">
         <div class="absolute right-0 top-0 w-64 h-64 bg-green-900/20 rounded-full blur-[100px]"></div>
         <div class="max-w-3xl mx-auto px-6 relative z-10">
@@ -425,6 +460,7 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
     <section class="py-24 bg-abyss border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -469,7 +505,7 @@
         </div>
     </section>
 
-    <!-- ปรับปรุง Section The Development Team -->
+    <!-- Team Section -->
     <section id="team" class="py-24 bg-abyss border-t border-white/5 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -570,6 +606,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="border-t border-white/5 py-12 text-center bg-void">
         <div class="mb-8 flex justify-center space-x-6">
             <a href="https://facebook.com" target="_blank" class="text-gray-500 hover:text-stardust transition transform hover:scale-110 drop-shadow-[0_0_5px_rgba(212,175,55,0)] hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]">
@@ -588,7 +625,20 @@
         <p class="text-gray-600 text-[10px] font-serif tracking-[0.4em] uppercase">© 2026 Atelier de Boulette. All Dimensions Reserved.</p>
     </footer>
 
+    <!-- Scripts -->
     <script>
+        // --- NEW LOGO MODAL FUNCTIONS ---
+        function openLogoModal() {
+            document.getElementById('logoModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLogoModal() {
+            document.getElementById('logoModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // --- ORIGINAL FUNCTIONS ---
         const galleryData = [
             { id: 1, image: "4.jpg", name: "หญ้าอุดมสมบูรณ์", en: "The Verdant Pasture", flavor: "รสชาเขียว", pro: "22g", cal: "110" },
             { id: 2, image: "3.jpg", name: "ทุ่งรวงทอง", en: "Golden Harvest", flavor: "รสข้าวโอ๊ต", pro: "20g", cal: "130" },
